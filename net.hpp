@@ -14,7 +14,16 @@
 
 namespace net {
 
+struct SmtpInfo {
+	std::string server_name;
+	std::string email;
+	std::string password;
+};
+
 std::string http_get(CURL *curl, const std::string &url);
+
+void send_email(CURL *curl, const SmtpInfo &smtp_info, const std::string to_email_addr,
+		const std::string subject, const std::string message);
 
 } // namespace net
 
