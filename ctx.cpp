@@ -5,10 +5,23 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
+#include <cstdlib>
+#include <fstream>
+
 #include "ctx.hpp"
+#include "util.hpp"
 
 Ctx::Ctx(std::string_view prg_name, std::vector<std::string_view> args)
-    : prg_name(prg_name), args(args) {}
+    : prg_name(prg_name), args(args), config_filepath("config.json") {
+
+	std::ifstream config_file(config_filepath);
+	if (!config_file) {
+		util::log(util::LOG_ERROR, "Could not open confile at {}",
+			  config_filepath.string());
+		exit(-1);
+	}
+	config = nlohmann::json::parse(config_file);
+}
 
 Ctx::~Ctx() {}
 

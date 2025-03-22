@@ -2,6 +2,15 @@
 
 A CLI application for tracking B3 stocks
 
+## Configuration
+
+A `config.json` file needs to be on the current working directory when executing
+the application.
+
+This configuration file will have some parameters needed by the application, you
+can find an example configuration on
+[config.json.example](./config.json.example)
+
 ## Dependencies
 
 >[!TIP]

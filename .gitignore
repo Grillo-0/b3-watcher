@@ -5,3 +5,6 @@
 subprojects/packagecache
 
 subprojects/nlohmann_json-*
+
+# config file
+config.json

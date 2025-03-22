@@ -11,9 +11,13 @@
 #include <string>
 #include <vector>
 
+#include <nlohmann/json.hpp>
+
 struct Ctx {
 	std::string prg_name;
 	std::vector<std::string_view> args;
+	std::filesystem::path config_filepath;
+	nlohmann::json config;
 
 	Ctx(std::string_view prg_name, std::vector<std::string_view> args);
 	~Ctx();
