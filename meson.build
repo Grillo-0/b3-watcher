@@ -22,6 +22,7 @@ srcs = [
 ]
 
 deps = [
+  dependency('libcurl'),
   dependency('nlohmann_json'),
 ]
 

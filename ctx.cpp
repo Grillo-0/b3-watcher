@@ -21,9 +21,13 @@ Ctx::Ctx(std::string_view prg_name, std::vector<std::string_view> args)
 		exit(-1);
 	}
 	config = nlohmann::json::parse(config_file);
+
+	curl = curl_easy_init();
 }
 
-Ctx::~Ctx() {}
+Ctx::~Ctx() {
+	curl_easy_cleanup(curl);
+}
 
 Ctx Ctx::from_args(int argc, char **argv) {
 	std::string_view prg_name = argv[0];

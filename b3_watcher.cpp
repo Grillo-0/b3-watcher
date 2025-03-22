@@ -8,6 +8,10 @@
 #include "ctx.hpp"
 
 int main(int argc, char **argv) {
+	curl_global_init(CURL_GLOBAL_DEFAULT);
+
 	auto ctx = Ctx::from_args(argc, argv);
+
+	curl_global_cleanup();
 	return 0;
 }

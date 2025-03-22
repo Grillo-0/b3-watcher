@@ -19,6 +19,7 @@ can find an example configuration on
 > no extra work needed.
 
 - [meson][] (build system)
+- [libcurl][] (lib for network communication)
 - [Nlohmann Json library][nlohmann-json] (lib for dealing with JSON)
 
 ## How to build it
@@ -58,4 +59,5 @@ meson install -C build
 ```
 
 [meson]: https://mesonbuild.com/
+[libcurl]: https://curl.se/libcurl/
 [nlohmann-json]: https://github.com/nlohmann/json
