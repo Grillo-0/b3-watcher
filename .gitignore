@@ -1,2 +1,7 @@
 # clangd cache
 .cache
+
+# meson wrap's generated files
+subprojects/packagecache
+
+subprojects/nlohmann_json-*

@@ -4,7 +4,13 @@ A CLI application for tracking B3 stocks
 
 ## Dependencies
 
+>[!TIP]
+> You only need to worry about installing [meson][]. During the build process,
+> if [meson][] can't find any of the libs it should download and compile itself,
+> no extra work needed.
+
 - [meson][] (build system)
+- [Nlohmann Json library][nlohmann-json] (lib for dealing with JSON)
 
 ## How to build it
 
@@ -43,3 +49,4 @@ meson install -C build
 ```
 
 [meson]: https://mesonbuild.com/
+[nlohmann-json]: https://github.com/nlohmann/json

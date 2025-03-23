@@ -21,8 +21,13 @@ srcs = [
   'ctx.cpp',
 ]
 
+deps = [
+  dependency('nlohmann_json'),
+]
+
 exe = executable(
   'b3-watcher',
   srcs,
   install : true,
+  dependencies: deps,
 )
