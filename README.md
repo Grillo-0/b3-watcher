@@ -12,6 +12,7 @@ Usage: b3-watcher <COMMAND>
 
 Commands:
   list:  List available B3 stock symbols
+  info:  Get information about a B3 stock
   help:  Show this help
 ```
 
@@ -25,6 +26,22 @@ List available B3 stock symbols
 
 Usage: b3-watcher list
    or: b3-watcher list <COMMAND>
+
+Commands:
+  help:  Show this help
+```
+
+### `info`
+
+```sh
+$ b3-watcher info help
+Get information about a B3 stock
+
+Usage: b3-watcher info <stock_symbol>
+   or: b3-watcher info <COMMAND>
+
+Arguments:
+  stock_symbol:  B3 stock symbol
 
 Commands:
   help:  Show this help

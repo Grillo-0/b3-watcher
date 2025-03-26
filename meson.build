@@ -20,6 +20,7 @@ srcs = [
   'b3_watcher.cpp',
   'cmd.cpp',
   'ctx.cpp',
+  'info.cpp',
   'list.cpp',
   'net.cpp',
 ]

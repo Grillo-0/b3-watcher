@@ -7,6 +7,7 @@
  */
 #include "cmd.hpp"
 #include "ctx.hpp"
+#include "info.hpp"
 #include "list.hpp"
 
 struct MainCmd : public cmd::Cmd {
@@ -29,6 +30,7 @@ int main(int argc, char **argv) {
 	MainCmd main_cmd;
 	main_cmd.data.name = ctx.prg_name;
 	main_cmd.add_subcmd(std::make_unique<List>());
+	main_cmd.add_subcmd(std::make_unique<Info>());
 
 	main_cmd.run(ctx);
 
