@@ -1,6 +1,6 @@
 # B3 watcher
 
-A CLI application for tracking B3 stocks
+A CLI application for tracking B3 stocks that uses the [mfinace API][mfinace].
 
 ## Usage
 
@@ -9,6 +9,22 @@ $ b3-watcher help
 Watch B3 stock prices
 
 Usage: b3-watcher <COMMAND>
+
+Commands:
+  list:  List available B3 stock symbols
+  help:  Show this help
+```
+
+## Commands
+
+### `list`
+
+```sh
+$ b3-watcher list help
+List available B3 stock symbols
+
+Usage: b3-watcher list
+   or: b3-watcher list <COMMAND>
 
 Commands:
   help:  Show this help
@@ -73,3 +89,4 @@ meson install -C build
 [meson]: https://mesonbuild.com/
 [libcurl]: https://curl.se/libcurl/
 [nlohmann-json]: https://github.com/nlohmann/json
+[mfinace]: https://mfinance.com.br/swagger/index.html
