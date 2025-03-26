@@ -1,2 +1,8 @@
 {
+	"to_email_addr": "myemail@mymail.com",
+	"smtp" : {
+		"server_name": "mymail.com",
+		"email": "myemail@mymail.com",
+		"password": "password"
+	}
 }

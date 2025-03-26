@@ -11,9 +11,10 @@ Watch B3 stock prices
 Usage: b3-watcher <COMMAND>
 
 Commands:
-  list:  List available B3 stock symbols
-  info:  Get information about a B3 stock
-  help:  Show this help
+  list:   List available B3 stock symbols
+  info:   Get information about a B3 stock
+  track:  Track the price of a stock and send emails if it crosses the sell/buy price
+  help:   Show this help
 ```
 
 ## Commands
@@ -47,6 +48,28 @@ Commands:
   help:  Show this help
 ```
 
+### `track`
+
+>[!TIP]
+> This is the default command, this means that you don't need to type
+> `b3-watcher track`, just `b3-watcher` works.
+
+```sh
+$ b3-watcher track help
+Track the price of a stock and send emails if it crosses the sell/buy price
+
+Usage: b3-watcher track <stock_symbol> <sell_price> <buy_price>
+   or: b3-watcher track <COMMAND>
+
+Arguments:
+  stock_symbol:  B3 stock symbol
+  sell_price:    Minimum price to hold selling the stock
+  buy_price:     Minimum price to hold buying the stock
+
+Commands:
+  help:  Show this help
+```
+
 ## Configuration
 
 A `config.json` file needs to be on the current working directory when executing
@@ -55,6 +78,15 @@ the application.
 This configuration file will have some parameters needed by the application, you
 can find an example configuration on
 [config.json.example](./config.json.example)
+
+The current configuration setting are:
+
+- `to_email_addr`: The email address to send the messages sent by the `track`
+  command
+- `smtp`: SMTP email configuration to be able to send emails
+    - `server_name`: SMTP server name
+    - `email`: The email address that is going to be used to send the emails
+    - `password`: The password for the email account
 
 ## Dependencies
 

@@ -9,6 +9,7 @@
 #include "ctx.hpp"
 #include "info.hpp"
 #include "list.hpp"
+#include "track.hpp"
 
 struct MainCmd : public cmd::Cmd {
 	MainCmd()
@@ -31,6 +32,7 @@ int main(int argc, char **argv) {
 	main_cmd.data.name = ctx.prg_name;
 	main_cmd.add_subcmd(std::make_unique<List>());
 	main_cmd.add_subcmd(std::make_unique<Info>());
+	main_cmd.add_subcmd(std::make_unique<Track>());
 
 	main_cmd.run(ctx);
 

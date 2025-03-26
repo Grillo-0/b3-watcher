@@ -23,6 +23,7 @@ srcs = [
   'info.cpp',
   'list.cpp',
   'net.cpp',
+  'track.cpp',
 ]
 
 deps = [
