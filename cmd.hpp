@@ -34,6 +34,7 @@ struct Cmd {
 		bool is_pure_meta_cmd = false;
 		std::optional<std::string> father_cmd_prefix = {};
 		std::vector<std::unique_ptr<Cmd>> subcmds = {};
+		std::optional<size_t> alias_cmd_idx = {};
 		std::vector<Arg> args = {};
 	};
 	Data data;
@@ -41,7 +42,7 @@ struct Cmd {
 	Cmd(Data &&d) : data(std::move(d)) {};
 	virtual ~Cmd() = default;
 
-	void add_subcmd(std::unique_ptr<Cmd> subcmd);
+	void add_subcmd(std::unique_ptr<Cmd> subcmd, bool alias = false);
 
 	void show_help();
 

@@ -8,13 +8,19 @@ A CLI application for tracking B3 stocks that uses the [mfinace API][mfinace].
 $ b3-watcher help
 Watch B3 stock prices
 
-Usage: b3-watcher <COMMAND>
+Usage: b3-watcher <stock_symbol> <sell_price> <buy_price>
+   or: b3-watcher <COMMAND>
+
+Arguments:
+  stock_symbol:  B3 stock symbol
+  sell_price:    Minimum price to hold selling the stock
+  buy_price:     Minimum price to hold buying the stock
 
 Commands:
-  list:   List available B3 stock symbols
-  info:   Get information about a B3 stock
-  track:  Track the price of a stock and send emails if it crosses the sell/buy price
-  help:   Show this help
+  list:             List available B3 stock symbols
+  info:             Get information about a B3 stock
+  track (default):  Track the price of a stock and send emails if it crosses the sell/buy price
+  help:             Show this help
 ```
 
 ## Commands

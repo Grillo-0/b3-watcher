@@ -21,7 +21,11 @@
 
 namespace cmd {
 
-void Cmd::add_subcmd(std::unique_ptr<Cmd> subcmd) {
+void Cmd::add_subcmd(std::unique_ptr<Cmd> subcmd, bool alias) {
+	if (alias) {
+		data.alias_cmd_idx = data.subcmds.size();
+	}
+
 	subcmd->data.father_cmd_prefix = std::string();
 	if (data.father_cmd_prefix)
 		*subcmd->data.father_cmd_prefix += *data.father_cmd_prefix + " ";
@@ -75,9 +79,19 @@ void show_args(std::vector<Arg> args) {
 void Cmd::show_help() {
 	std::cout << data.description << "\n\n";
 
-	std::cout << std::format("Usage: {}\n", get_usage_str());
+	if (data.alias_cmd_idx) {
+		const auto &alias_cmd = data.subcmds[*data.alias_cmd_idx];
+		std::cout << std::format("Usage: {}\n", alias_cmd->get_usage_str(data.name));
+	} else {
+		std::cout << std::format("Usage: {}\n", get_usage_str());
+	}
 
 	std::vector<Arg> args(data.args);
+	if (data.alias_cmd_idx) {
+		const auto &arg_to_add = data.subcmds[*data.alias_cmd_idx]->data.args;
+		args.insert(args.end(), arg_to_add.begin(), arg_to_add.end());
+	}
+
 	if (!args.empty()) {
 		std::cout << "\n";
 
@@ -98,8 +112,19 @@ void Cmd::show_help() {
 					 }) |
 					 std::views::transform(&std::string::length)));
 
-		for (const auto &c : data.subcmds) {
-			std::cout << std::format("  {:<{}}  {}\n", c->data.name + ':',
+		if (data.alias_cmd_idx) {
+			const auto &alias_cmd = data.subcmds[*data.alias_cmd_idx];
+			max_subcmd_len = std::max(max_subcmd_len,
+						  (alias_cmd->data.name + " (default)").length());
+		}
+
+		for (size_t i = 0; i < data.subcmds.size(); i++) {
+			const auto &c = data.subcmds[i];
+			auto subcmd_name = c->data.name;
+			if (data.alias_cmd_idx == i)
+				subcmd_name += " (default)";
+
+			std::cout << std::format("  {:<{}}  {}\n", subcmd_name + ':',
 						 max_subcmd_len + 1, c->data.description);
 		}
 	}
@@ -124,14 +149,24 @@ std::optional<ArgResult> Cmd::parse_args(std::vector<std::string_view> args) {
 
 void Cmd::run(Ctx &ctx) {
 	auto run_cmd = [this](Ctx &ctx) {
-		auto args = parse_args(ctx.args);
+		if (data.alias_cmd_idx) {
+			const auto &alias_cmd = data.subcmds[*data.alias_cmd_idx];
+			auto args = alias_cmd->parse_args(ctx.args);
+			if (!args) {
+				show_help();
+				exit(-1);
+			}
+			alias_cmd->run_impl(ctx, std::move(*args));
+		} else {
+			auto args = parse_args(ctx.args);
 
-		if (!args) {
-			show_help();
-			exit(-1);
+			if (!args) {
+				show_help();
+				exit(-1);
+			}
+
+			run_impl(ctx, std::move(*args));
 		}
-
-		run_impl(ctx, std::move(*args));
 	};
 
 	if (ctx.args.empty()) {
