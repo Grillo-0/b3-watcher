@@ -18,6 +18,7 @@ project(
 
 srcs = [
   'b3_watcher.cpp',
+  'cmd.cpp',
   'ctx.cpp',
   'net.cpp',
 ]

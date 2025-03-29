@@ -2,6 +2,18 @@
 
 A CLI application for tracking B3 stocks
 
+## Usage
+
+```sh
+$ b3-watcher help
+Watch B3 stock prices
+
+Usage: b3-watcher <COMMAND>
+
+Commands:
+  help:  Show this help
+```
+
 ## Configuration
 
 A `config.json` file needs to be on the current working directory when executing
